@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Trade Hub - Plant & Garden Supply Trading</title>
+    <meta name="description" content="Connect with fellow gardeners to trade plants, seeds, tools, and garden supplies.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i data-feather="leaf"></i>
+                <span>Garden Trade Hub</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#trades">Browse Trades</a></li>
+                <li><a href="#add-trade">Add Trade</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Trade Plants & Garden Supplies</h1>
+                    <p>Connect with fellow gardeners in your community to exchange plants, seeds, tools, and garden supplies.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showAddTradeForm()">
+                            <i data-feather="plus-circle"></i>
+                            Add Trade
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToTrades()">
+                            <i data-feather="search"></i>
+                            Browse Trades
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <svg viewBox="0 0 400 300" class="hero-svg">
+                        <rect width="400" height="300" fill="#f8f9fa" rx="20"/>
+                        <circle cx="100" cy="150" r="60" fill="#22c55e" opacity="0.3"/>
+                        <circle cx="200" cy="100" r="40" fill="#16a34a" opacity="0.5"/>
+                        <circle cx="300" cy="180" r="50" fill="#15803d" opacity="0.4"/>
+                        <text x="200" y="160" text-anchor="middle" fill="#166534" font-size="20" font-weight="bold">🌱 Garden Trading 🌿</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section id="trades" class="filter-section">
+        <div class="container">
+            <h2>Browse Trade Listings</h2>
+            <div class="filter-controls">
+                <div class="search-box">
+                    <i data-feather="search"></i>
+                    <input type="text" id="searchInput" placeholder="Search trades...">
+                </div>
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Plants">Plants</option>
+                    <option value="Seeds">Seeds</option>
+                    <option value="Tools">Tools</option>
+                    <option value="Supplies">Supplies</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <!-- Trade Listings -->
+            <div id="tradesContainer" class="trades-grid">
+                <!-- Sample trade card -->
+                <div class="trade-card" data-category="Plants" data-search="tomato seedlings herb cuttings healthy plants">
+                    <div class="trade-image">
+                        <i data-feather="leaf" size="48"></i>
+                    </div>
+                    <div class="trade-content">
+                        <div class="trade-header">
+                            <h3>Tomato Seedlings for Herbs</h3>
+                            <span class="category-badge">Plants</span>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-offer">
+                                <strong>Offering:</strong> 6 healthy tomato seedlings (Roma and Cherry varieties)
+                            </div>
+                            <div class="trade-seeking">
+                                <strong>Seeking:</strong> Herb cuttings (basil, oregano, thyme)
+                            </div>
+                        </div>
+                        <p class="trade-description">I have extra tomato seedlings that need good homes. Looking for herb cuttings to start my herb garden.</p>
+                        <div class="trade-footer">
+                            <div class="trade-location">
+                                <i data-feather="map-pin"></i>
+                                <span>Portland, OR</span>
+                            </div>
+                            <button class="btn btn-contact" onclick="showContact('sample1')">
+                                <i data-feather="user"></i>
+                                Contact
+                            </button>
+                        </div>
+                        <div class="trade-date">Posted: 2025-07-08</div>
+                    </div>
+                </div>
+                
+                <!-- Another sample trade -->
+                <div class="trade-card" data-category="Tools" data-search="garden tools rake shovel pruning shears">
+                    <div class="trade-image">
+                        <i data-feather="tool" size="48"></i>
+                    </div>
+                    <div class="trade-content">
+                        <div class="trade-header">
+                            <h3>Garden Tools Exchange</h3>
+                            <span class="category-badge">Tools</span>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-offer">
+                                <strong>Offering:</strong> Rake and small shovel, lightly used
+                            </div>
+                            <div class="trade-seeking">
+                                <strong>Seeking:</strong> Pruning shears or watering can
+                            </div>
+                        </div>
+                        <p class="trade-description">Downsizing my tool collection. These are in great condition and ready for a new garden.</p>
+                        <div class="trade-footer">
+                            <div class="trade-location">
+                                <i data-feather="map-pin"></i>
+                                <span>Seattle, WA</span>
+                            </div>
+                            <button class="btn btn-contact" onclick="showContact('sample2')">
+                                <i data-feather="user"></i>
+                                Contact
+                            </button>
+                        </div>
+                        <div class="trade-date">Posted: 2025-07-07</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Trade Form -->
+    <section id="add-trade" class="add-trade-section" style="display: none;">
+        <div class="container">
+            <div class="form-container">
+                <h2>
+                    <i data-feather="plus-circle"></i>
+                    Add New Trade Listing
+                </h2>
+                <form id="tradeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="title">Trade Title *</label>
+                            <input type="text" id="title" name="title" required placeholder="e.g., Tomato seedlings for herb cuttings">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select category</option>
+                                <option value="Plants">Plants</option>
+                                <option value="Seeds">Seeds</option>
+                                <option value="Tools">Tools</option>
+                                <option value="Supplies">Supplies</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="offering">What I'm Offering *</label>
+                            <textarea id="offering" name="offering" required placeholder="Describe what you're offering to trade"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="seeking">What I'm Seeking *</label>
+                            <textarea id="seeking" name="seeking" required placeholder="Describe what you're looking for"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Additional details about your trade..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" placeholder="e.g., Portland, OR or ZIP code">
+                        </div>
+                        <div class="form-group">
+                            <label for="image_url">Image URL</label>
+                            <input type="url" id="image_url" name="image_url" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                    
+                    <h3>Contact Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact_name">Your Name *</label>
+                            <input type="text" id="contact_name" name="contact_name" required placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_email">Email Address *</label>
+                            <input type="email" id="contact_email" name="contact_email" required placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact_phone">Phone Number</label>
+                            <input type="tel" id="contact_phone" name="contact_phone" placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="hideAddTradeForm()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Trade Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Contact Information</h3>
+                <button class="close-btn" onclick="hideContactModal()">×</button>
+            </div>
+            <div class="modal-body" id="contactModalBody">
+                <!-- Contact info will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" style="display: none;">
+        <div class="toast-content">
+            <span id="toastMessage"></span>
+            <button class="toast-close" onclick="hideToast()">×</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Garden Trade Hub</h4>
+                    <p>Connecting gardeners through plant and supply trading.</p>
+                </div>
+                <div class="footer-section">
+                    <p>&copy; 2025 Garden Trade Hub. Built with 🌱 for gardeners.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            initializeApp();
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
